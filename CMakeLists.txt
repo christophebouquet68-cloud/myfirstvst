@@ -37,6 +37,8 @@ target_compile_definitions(MyFirstVST
         JUCE_DISPLAY_SPLASH_SCREEN=0
 )
 
+juce_generate_juce_header(MyFirstVST)
+
 target_link_libraries(MyFirstVST
     PRIVATE
         juce::juce_audio_utils

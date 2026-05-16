@@ -186,6 +186,11 @@ void MyFirstVSTProcessor::setStateInformation(const void* data, int sizeInBytes)
         apvts.replaceState(juce::ValueTree::fromXml(*xml));
 }
 
+juce::AudioProcessorEditor* MyFirstVSTProcessor::createEditor()
+{
+    return new MyFirstVSTEditor(*this);
+}
+
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
     return new MyFirstVSTProcessor();

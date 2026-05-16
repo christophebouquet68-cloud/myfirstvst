@@ -7,7 +7,7 @@ static const juce::Colour kText      { 0xffcdd6f4 };
 static const juce::Colour kSubText   { 0xff6c7086 };
 
 MyFirstVSTEditor::MyFirstVSTEditor(MyFirstVSTProcessor& p)
-    : AudioProcessorEditor(&p), processor(p)
+    : AudioProcessorEditor(&p), pluginProcessor(p)
 {
     setSize(780, 520);
     getLookAndFeel().setColour(juce::Slider::thumbColourId, kAccent);
@@ -18,7 +18,7 @@ MyFirstVSTEditor::MyFirstVSTEditor(MyFirstVSTProcessor& p)
     getLookAndFeel().setColour(juce::PopupMenu::backgroundColourId, kPanel);
     getLookAndFeel().setColour(juce::PopupMenu::textColourId, kText);
 
-    auto& apvts = processor.apvts;
+    auto& apvts = pluginProcessor.apvts;
 
     // ---- Osc 1 ----
     osc1WaveformBox.addItem("Sawtooth", 1);
@@ -26,7 +26,7 @@ MyFirstVSTEditor::MyFirstVSTEditor(MyFirstVSTProcessor& p)
     osc1WaveformBox.addItem("Triangle", 3);
     osc1WaveformBox.addItem("Pulse",    4);
     osc1WaveLabel.setText("Waveform", juce::dontSendNotification);
-    osc1WaveLabel.setFont(juce::Font(11.0f));
+    osc1WaveLabel.setFont(juce::FontOptions(11.0f));
     osc1WaveLabel.setJustificationType(juce::Justification::centred);
     osc1WaveLabel.setColour(juce::Label::textColourId, kText);
     osc1OctaveKnob.setup("Octave");
@@ -46,7 +46,7 @@ MyFirstVSTEditor::MyFirstVSTEditor(MyFirstVSTProcessor& p)
     osc2WaveformBox.addItem("Triangle", 3);
     osc2WaveformBox.addItem("Pulse",    4);
     osc2WaveLabel.setText("Waveform", juce::dontSendNotification);
-    osc2WaveLabel.setFont(juce::Font(11.0f));
+    osc2WaveLabel.setFont(juce::FontOptions(11.0f));
     osc2WaveLabel.setJustificationType(juce::Justification::centred);
     osc2WaveLabel.setColour(juce::Label::textColourId, kText);
     osc2OctaveKnob.setup("Octave");
@@ -87,7 +87,7 @@ MyFirstVSTEditor::MyFirstVSTEditor(MyFirstVSTProcessor& p)
     lfoTargetBox.addItem("Filter",    2);
     lfoTargetBox.addItem("Amplitude", 3);
     lfoTargetLabel.setText("Target", juce::dontSendNotification);
-    lfoTargetLabel.setFont(juce::Font(11.0f));
+    lfoTargetLabel.setFont(juce::FontOptions(11.0f));
     lfoTargetLabel.setJustificationType(juce::Justification::centred);
     lfoTargetLabel.setColour(juce::Label::textColourId, kText);
     lfoRateKnob.setup("Rate");
@@ -134,7 +134,7 @@ void MyFirstVSTEditor::drawSection(juce::Graphics& g, juce::Rectangle<int> bound
     g.setColour(kAccent);
     g.drawRoundedRectangle(bounds.toFloat().reduced(0.5f), 6.0f, 1.0f);
     g.setColour(kText);
-    g.setFont(juce::Font(12.0f, juce::Font::bold));
+    g.setFont(juce::FontOptions(12.0f).withStyle("Bold"));
     g.drawText(title, bounds.removeFromTop(18), juce::Justification::centred);
 }
 
@@ -144,7 +144,7 @@ void MyFirstVSTEditor::paint(juce::Graphics& g)
 
     // Title
     g.setColour(kAccent);
-    g.setFont(juce::Font(20.0f, juce::Font::bold));
+    g.setFont(juce::FontOptions(20.0f).withStyle("Bold"));
     g.drawText("MyFirstVST", getLocalBounds().removeFromTop(36), juce::Justification::centred);
 
     const int margin = 8;

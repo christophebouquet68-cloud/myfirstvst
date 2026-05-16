@@ -14,7 +14,7 @@ struct LabelledKnob : public juce::Component
     {
         label.setText(name, juce::dontSendNotification);
         label.setJustificationType(juce::Justification::centred);
-        label.setFont(juce::Font(11.0f));
+        label.setFont(juce::FontOptions(11.0f));
     }
 
     void resized() override
@@ -35,7 +35,7 @@ public:
     void resized() override;
 
 private:
-    MyFirstVSTProcessor& processor;
+    MyFirstVSTProcessor& pluginProcessor;
 
     using Attachment = juce::AudioProcessorValueTreeState::SliderAttachment;
     using ComboAttachment = juce::AudioProcessorValueTreeState::ComboBoxAttachment;
